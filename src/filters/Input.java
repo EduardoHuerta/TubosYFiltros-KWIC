@@ -1,26 +1,26 @@
 package filters;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.io.*;
 
 public class Input extends Filter { //Heredamos la clase abstracta Filter para tomar como filtro a la clase Input
 
-    FileInputStream fileIn;
-    private BufferedReader reader;
+    String file;
 
-    public Input(FileInputStream filtroInput, Pipe outputDelFiltroInput) {
+    public Input(String filtroInput, Pipe outputDelFiltroInput) {
         super(filtroInput, outputDelFiltroInput);
-        fileIn = filtroInput;
+        file = filtroInput;
     }
-
 
     public void run(){
         try {
-            byte[] bytes = fileIn.readAllBytes();
-            String s = new String(bytes, StandardCharsets.UTF_8);
-            output.write(s);
+            System.out.println("Filtro de entrada trabajando con los datos de entrada");
+            BufferedReader br =  new BufferedReader(new FileReader(file));
+            String linea = null;
+            while ((linea = br.readLine()) != null){
+                output.write(linea + '\n');
+            }
+            output.closeWriter();
+            br.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

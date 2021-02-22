@@ -12,6 +12,7 @@ public class Output extends Filter{
 
     public void run() {
         try {
+            System.out.println("Filtro de salida");
             String orderedLines = input.read();
             String archivoSalida;
             String[] lines = orderedLines.split("\\n");

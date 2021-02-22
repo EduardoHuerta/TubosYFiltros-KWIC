@@ -3,6 +3,7 @@ package filters;
 import java.io.IOException;
 import java.io.PipedReader;
 import java.io.PipedWriter;
+import java.util.ArrayList;
 
 public class Pipe {
 
@@ -18,7 +19,6 @@ public class Pipe {
 
     public void write(String s) throws IOException {
         writer.write(s);
-        writer.close();
     }
 
     public String read() throws IOException {
@@ -29,5 +29,13 @@ public class Pipe {
         }
         reader.close();
         return sb.toString();
+    }
+
+    public void closeWriter() throws IOException {
+        writer.flush();
+        writer.close();
+    }
+    public void closeReader() throws IOException {
+        reader.close();
     }
 }

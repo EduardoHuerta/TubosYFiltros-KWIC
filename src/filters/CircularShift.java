@@ -2,66 +2,52 @@ package filters;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
-public class CircularShift extends Filter{
+public class CircularShift extends Filter {
 
-    public CircularShift(Pipe in, Pipe out){
-        super(in,out);
-    }
-
-    //execute a single shift
-    private String[] shift(String[] line) {
-        String[] shiftLine = line.clone();
-
-        String shiftWord = shiftLine[0];
-        for(int i = 0; i < shiftLine.length - 1; ++i)
-            shiftLine[i] = shiftLine[i + 1];
-
-        shiftLine[shiftLine.length - 1] = shiftWord;
-        return shiftLine;
-    }
-
-    //execute 'times' consecutive single shift over the same line
-    private String[] shiftTimes(String[] line, int times) {
-        String[] shiftedTimes = line.clone();
-        while(times > 0) {
-            shiftedTimes = shift(shiftedTimes);
-            --times;
-        }
-        return shiftedTimes;
-    }
-
-    private ArrayList<String[]> shiftLine(String[] line){
-        ArrayList<String[]> shiftedLine = new ArrayList<String[]>();
-        for(int i = 0; i < line.length; ++i) {
-            String[] shifted = shiftTimes(line, i);
-            shiftedLine.add(shifted);
-        }
-        return shiftedLine;
-    }
-
-    private ArrayList<String[]> shiftLines(String[] lines){
-        ArrayList<String[]> originLinesByWords = Utils.SplitLinesByWords(lines);
-        ArrayList<String[]> shiftedLines = new ArrayList<String[]>();
-
-        for(String[] line : originLinesByWords) {   //
-            ArrayList<String[]> shiftedLine = shiftLine(line);
-            shiftedLines.addAll(shiftedLine);
-        }
-        return shiftedLines;
-    }
+    public CircularShift(Pipe in, Pipe out) { super(in, out); }
 
     public void run() {
         try {
-            String lines[] = input.read().trim().split("\\n");
-            Utils.RemoveChangeOfLineChars(lines);
-
-            ArrayList<String[]> shiftedLines = shiftLines(lines);
-
-            output.write(Utils.rebuildString(shiftedLines));
-
+            System.out.println("Filtro Circular Shift");
+            String[] lines = input.read().trim().split("\\n");
+            ArrayList<String> listaDePalabras = new ArrayList<String>();
+            ArrayList<String> palabrasShifteadas = new ArrayList<String>();
+            for (String line: lines) {
+                listaDePalabras.add(line);
+            }
+            for (String inputSentence : listaDePalabras) {
+                ArrayList<String> words = splitSentencesToWords(inputSentence);
+                for (int i = 0; i < words.size(); i++) {
+                    String word = words.get(i);
+                    String shiftedSentence = formSentenceFromWords(words, i);
+                    palabrasShifteadas.add(shiftedSentence);
+                }
+            }
+            for (String lineasPipes : palabrasShifteadas) {
+                output.write(lineasPipes + "\n");
+            }
+            output.closeWriter();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    // El siguiente método forma una sentencia a partir de una lista de palabras
+    private static String formSentenceFromWords(ArrayList<String> words, int offset) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < words.size(); i++) {
+            int idx = (i + offset) % words.size();
+            String word = words.get(idx);
+            sb.append(word).append(" ");
+        }
+        return sb.toString().trim();
+    }
+
+    private ArrayList<String> splitSentencesToWords (String sentencia) {
+        String[] palabras = sentencia.split("\\s+");
+        return new ArrayList<>(Arrays.asList(palabras));
+    }
 }
+

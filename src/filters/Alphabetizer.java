@@ -15,11 +15,12 @@ public class Alphabetizer extends Filter{
             String[] shiftedLines = input.read().trim().split("\\n");
 
             Arrays.sort(shiftedLines, String.CASE_INSENSITIVE_ORDER);  // se utiliza una coleccion para el ordenamiento automatico
+
             StringBuilder sb = new StringBuilder();
             for(String str : shiftedLines) {
-                sb.append(str).append("\n");
+                output.write(str + "\n");
             }
-            output.write((sb.toString()));
+            output.closeWriter();
         } catch (IOException e) {
             System.out.println("No se pudieron ordenar los datos");
         }
