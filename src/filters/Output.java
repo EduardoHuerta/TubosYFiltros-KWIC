@@ -13,9 +13,8 @@ public class Output extends Filter{
     public void run() {
         try {
             System.out.println("Filtro de salida");
-            String orderedLines = input.read();
+            String[] orderedLines = input.read().trim().split("\n");
             String archivoSalida;
-            String[] lines = orderedLines.split("\\n");
             JFileChooser jFileChooser = new JFileChooser();
             jFileChooser.setDialogTitle("Filtro de salida");
             jFileChooser.setCurrentDirectory(new File("src"));
@@ -26,13 +25,12 @@ public class Output extends Filter{
                 archivoSalida = "src/output.txt";
             }
             FileWriter fw = new FileWriter(archivoSalida);
-             PrintWriter pw = new PrintWriter(fw);
+            PrintWriter pw = new PrintWriter(fw);
 
-            for(String line : lines) {
+            for(String line : orderedLines) {
                 pw.println(line);
             }
             pw.close();
-
             System.out.println("Se a creado satisfactoriamente el archivo txt de salida");
         } catch (Exception e) {
             e.printStackTrace();
