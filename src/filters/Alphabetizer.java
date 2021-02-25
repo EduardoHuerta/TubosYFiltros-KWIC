@@ -16,7 +16,6 @@ public class Alphabetizer extends Filter{
 
             Arrays.sort(shiftedLines, String.CASE_INSENSITIVE_ORDER);  // se utiliza una coleccion para el ordenamiento automatico
 
-            StringBuilder sb = new StringBuilder();
             for(String str : shiftedLines) {
                 output.write(str + "\n");
             }
