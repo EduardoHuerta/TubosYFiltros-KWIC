@@ -10,15 +10,15 @@ public abstract class Filter {
     protected Pipe input,output;   //Declaramos una tuberia para entrada
                                    //Declaramos una tuberia para salida
 
-    Filter(Pipe in, Pipe out){
+    public Filter(Pipe in, Pipe out){
         this.input = in;
         this.output = out;
     }
 
-    Filter(String in, Pipe out){ output = out;} //Este es para el primer filtro que recibe los datos
+    public Filter(String in, Pipe out){ output = out;} //Este es para el primer filtro que recibe los datos
                                                 // y manda al siguiente filtro
 
-    Filter(Pipe in){ input = in; } // Este constructor es para el filtro de salida
+    public Filter(Pipe in){ input = in; } // Este constructor es para el filtro de salida
 
     public abstract void run();
 
