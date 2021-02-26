@@ -17,7 +17,9 @@ public class CircularShift extends Filter {
                 ArrayList<String> words = splitSentencesToWords(inputSentence);
                 for (int i = 0; i < words.size(); i++) {
                     String shiftedSentence = formSentenceFromWords(words, i);
-                    palabrasShifteadas.add(shiftedSentence);
+                    if (!palabrasShifteadas.contains(shiftedSentence)){
+                        palabrasShifteadas.add(shiftedSentence);
+                    }
                 }
             }
             for (String lineasPipes : palabrasShifteadas) {
