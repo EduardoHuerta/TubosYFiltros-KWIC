@@ -22,7 +22,6 @@ public class Output extends Filter{
             } else {
                 archivoSalida = "src/output.txt";
             }
-            //FileWriter fw = new FileWriter(archivoSalida);
             PrintWriter pw = new PrintWriter(archivoSalida);
 
             for(String line : orderedLines) {
