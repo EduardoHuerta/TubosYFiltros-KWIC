@@ -8,7 +8,7 @@ public class CircularShift extends Filter {
 
     public CircularShift(Pipe in, Pipe out) { super(in, out); }
 
-    public void run() {
+    public void transform() {
         try {
             System.out.println("Filtro Circular Shift");
             String[] lines = input.read().trim().split("\\n");
@@ -47,4 +47,3 @@ public class CircularShift extends Filter {
         return new ArrayList<>(Arrays.asList(palabras));
     }
 }
-

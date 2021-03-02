@@ -9,7 +9,7 @@ public class Alphabetizer extends Filter{
         super(in, out);
     }
 
-    public void run() {
+    public void transform() {
         try {
             System.out.println("Filtro Alphabetizer en el se estan ordenando las sentencias");
             String[] shiftedLines = input.read().trim().split("\\n");

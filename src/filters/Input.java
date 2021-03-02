@@ -7,11 +7,11 @@ public class Input extends Filter { //Heredamos la clase abstracta Filter para t
     String file;
 
     public Input(String filtroInput, Pipe outputDelFiltroInput) {
-        super(filtroInput, outputDelFiltroInput);
+        super(null, outputDelFiltroInput);
         file = filtroInput;
     }
 
-    public void run(){
+    public void transform(){
         try {
             System.out.println("Filtro de entrada trabajando con los datos de entrada");
             BufferedReader br =  new BufferedReader(new FileReader(file));

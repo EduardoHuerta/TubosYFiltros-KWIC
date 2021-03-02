@@ -1,10 +1,5 @@
 package filters;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.IOException;
-
 public abstract class Filter {
 
     protected Pipe input,output;   //Declaramos una tuberia para entrada
@@ -15,11 +10,9 @@ public abstract class Filter {
         this.output = out;
     }
 
-    public Filter(String in, Pipe out){ output = out;} //Este es para el primer filtro que recibe los datos
-                                                // y manda al siguiente filtro
+    public abstract void transform();
 
-    public Filter(Pipe in){ input = in; } // Este constructor es para el filtro de salida
-
-    public abstract void run();
-
+    public void run() {
+        transform();
+    }
 }

@@ -1,16 +1,14 @@
 package filters;
 
 import javax.swing.*;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.*;
 
 public class Output extends Filter{
 
-    public Output(Pipe inputAlUltimoFiltro){ super(inputAlUltimoFiltro); }
+    public Output(Pipe inputAlUltimoFiltro){ super(inputAlUltimoFiltro,null); }
 
 
-    public void run() {
+    public void transform() {
         try {
             System.out.println("Filtro de salida");
             String[] orderedLines = input.read().trim().split("\n");
@@ -24,13 +22,13 @@ public class Output extends Filter{
             } else {
                 archivoSalida = "src/output.txt";
             }
-            FileWriter fw = new FileWriter(archivoSalida);
-            PrintWriter pw = new PrintWriter(fw);
+            //FileWriter fw = new FileWriter(archivoSalida);
+            PrintWriter pw = new PrintWriter(archivoSalida);
 
             for(String line : orderedLines) {
                 pw.println(line);
             }
-            pw.close();
+            pw.flush();
             System.out.println("Se a creado satisfactoriamente el archivo txt de salida");
         } catch (Exception e) {
             e.printStackTrace();
