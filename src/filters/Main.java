@@ -17,11 +17,6 @@ public class Main {
         } else {
             file = "src/input.txt";
         }
-        Main kwic = new Main();
-        kwic.execute(file);
-    }
-
-    public void execute(String file) throws IOException {
 
         Pipe inputToCircular = new Pipe();
         Pipe circularShifterToAlphabetizer = new Pipe();
@@ -32,9 +27,9 @@ public class Main {
         Filter alpha = new Alphabetizer(circularShifterToAlphabetizer, alphabetizerToOutput);
         Filter output = new Output(alphabetizerToOutput);
 
-        input.transform();
-        shifter.transform();
-        alpha.transform();
-        output.transform();
+        input.start();
+        shifter.start();
+        alpha.start();
+        output.start();
     }
 }
