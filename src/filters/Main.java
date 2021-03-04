@@ -32,9 +32,9 @@ public class Main {
         Filter alpha = new Alphabetizer(circularShifterToAlphabetizer, alphabetizerToOutput);
         Filter output = new Output(alphabetizerToOutput);
 
-        input.run();
-        shifter.run();
-        alpha.run();
-        output.run();
+        input.transform();
+        shifter.transform();
+        alpha.transform();
+        output.transform();
     }
 }
