@@ -12,7 +12,4 @@ public abstract class Filter {
 
     public abstract void transform();
 
-    public void run() {
-        transform();
-    }
 }
