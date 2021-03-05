@@ -10,14 +10,10 @@ public abstract class Filter implements Runnable {
         output = out;
     }
 
-    private boolean isStarted = false;
-
     public void start() {
-        if (!isStarted) {
-            isStarted = true;
-            Thread thread = new Thread(this);
-            thread.start();
-        }
+        Thread thread = new Thread(this);
+        System.out.println("Hilo:" +thread.getName() + "iniciando");
+        thread.start();
     }
 
     @Override
