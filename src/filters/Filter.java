@@ -4,9 +4,6 @@ public abstract class Filter implements Runnable{
 
     protected Pipe input,output;   //Declaramos una tuberia para entrada
                                    //Declaramos una tuberia para salida
-
-    long initialTime = System.currentTimeMillis();
-
     public Filter(Pipe in, Pipe out){
         input = in;
         output = out;
@@ -19,6 +16,7 @@ public abstract class Filter implements Runnable{
 
     @Override
     public void run() {
+        long initialTime = System.currentTimeMillis();
         transform();
         System.out.println((System.currentTimeMillis() - initialTime)	+ "milisegs" );
     }
